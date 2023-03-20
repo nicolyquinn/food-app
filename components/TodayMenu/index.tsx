@@ -1,3 +1,4 @@
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import {
@@ -7,6 +8,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+import Image from "next/image";
 import styles from "./TodayMenu.module.scss";
 
 const category = [
@@ -33,6 +35,27 @@ const category = [
   {
     icon: "🥤",
     name: "Drink",
+  },
+];
+
+const pizzas = [
+  {
+    pizzaImage: "/mushroom-pizza.png",
+    pizzaName: "Mushroom Pizza",
+    rating: "⭐⭐⭐⭐⭐",
+    price: "7.49",
+  },
+  {
+    pizzaImage: "/italian-pizza.webp",
+    pizzaName: "Italian Pizza",
+    rating: "⭐⭐⭐⭐",
+    price: "6.59",
+  },
+  {
+    pizzaImage: "/sausage-pizza.png",
+    pizzaName: "Sausage Pizza",
+    rating: "⭐⭐⭐⭐⭐",
+    price: "5.49",
   },
 ];
 
@@ -76,12 +99,38 @@ export const TodayMenu = () => {
           ))}
         </div>
       </div>
-      <a
-        target="_blank"
-        href="https://dribbble.com/shots/15082603-Food-Delivery-Dashboard/attachments/6812686?mode=media"
-      >
-        This is the design used as a base
-      </a>
+      <div className={styles.pizzaWrapper}>
+        {pizzas?.map((pizza) => (
+          <div>
+            <Image
+              width="150"
+              height="150"
+              alt="pizza"
+              src={pizza.pizzaImage}
+            />
+            <p className={styles.pizzaName}>{pizza.pizzaName}</p>
+
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <div>
+                <p>{pizza.rating}</p>
+                <div style={{ display: "flex", alignItems: "end" }}>
+                  <p className={styles.pizzaCurrency}>$ </p>
+                  <p className={styles.pizzaName}>{pizza.price}</p>
+                </div>
+              </div>
+              <AddRoundedIcon className={styles.plusIcon} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.footer}>
+        <a
+          target="_blank"
+          href="https://dribbble.com/shots/15082603-Food-Delivery-Dashboard/attachments/6812686?mode=media"
+        >
+          This project was inspired by this design from Dribbble
+        </a>
+      </div>
     </div>
   );
 };

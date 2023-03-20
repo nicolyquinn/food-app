@@ -19,7 +19,8 @@ export default function Home() {
           <Sidebar />
           <TodayMenu />
           <div>
-            <UserInfo /> and <Cart />
+            <UserInfo />
+            <Cart />
           </div>
         </div>
       </main>

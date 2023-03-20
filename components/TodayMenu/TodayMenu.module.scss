@@ -66,3 +66,37 @@
   height: 15px;
   width: 15px;
 }
+
+.pizzaWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer {
+  margin-top: 30px;
+
+  a {
+    text-decoration: none;
+    color: #fb9300;
+  }
+}
+
+.pizzaName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.pizzaCurrency {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fb9300;
+}
+
+.plusIcon {
+  background-color: #fb9300;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #fb9300;
+}
