@@ -2,35 +2,49 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
+import Image from "next/image";
 import styles from "./UserInfo.module.scss";
 
 export const UserInfo = () => {
   return (
     <div className={styles.body}>
       <div className={styles.userHeader}>
-        <Badge badgeContent={4} color="secondary">
+        <Badge
+          badgeContent={4}
+          color="primary"
+          className={styles.badgeNotification}
+        >
           <NotificationsRoundedIcon />
         </Badge>
         <div className={styles.userInfo}>
-          <Avatar>H</Avatar>
-          <p>Jeremy</p>
-          <p>User</p>
+          <Avatar className={styles.userAvatar} src="/panda-avatar.png" />
+          <div>
+            <p className={styles.userName}>Pandinha</p>
+            <p className={styles.userProfile}>User</p>
+          </div>
           <KeyboardArrowDownIcon />
         </div>
       </div>
+      <div className={styles.userCardBack}></div>
       <div className={styles.userCard}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>Debit Card</p>
-          <p>VISA</p>
+          <p className={styles.paymentType}>Debit Card</p>
+          <p className={styles.cardType}>VISA</p>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
-            <p>$ 1560.00</p>
-            <p>Jeremy Mathew</p>
+            <p className={styles.orderTotal}>$ 1560.00</p>
+            <p className={styles.cardName}>Pandinha</p>
           </div>
-          <div>
-            <p>CHIP IMAGE</p>
-            <p>58253242</p>
+          <div className={styles.cardInfo}>
+            <Image
+              className={styles.cardChip}
+              alt="card-chip"
+              width={30}
+              height={15}
+              src="/card-chip.png"
+            />
+            <p className={styles.cardNumber}>58253242</p>
           </div>
         </div>
       </div>

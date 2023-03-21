@@ -13,29 +13,34 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  Typography,
 } from "@mui/material";
 // styling
 import styles from "./Sidebar.module.scss";
 
 const SidebarButtons = [
   {
+    id: 1,
     buttonText: "chat",
     buttonIcon: ChatRoundedIcon,
   },
   {
+    id: 2,
     buttonText: "wallet",
     buttonIcon: AccountBalanceWalletRoundedIcon,
   },
   {
+    id: 3,
     buttonText: "favorites",
     buttonIcon: FavoriteRoundedIcon,
   },
   {
+    id: 4,
     buttonText: "list",
     buttonIcon: ArticleRoundedIcon,
   },
   {
+    id: 5,
     buttonText: "settings",
     buttonIcon: SettingsRoundedIcon,
   },
@@ -46,24 +51,23 @@ export const Sidebar = () => {
     <Box className={styles.body}>
       <div>
         <List>
-          <ListItem>
-            <ListItemButton>
-              <ListItemIcon>
+          <ListItem className={styles.listItem}>
+            <ListItemButton className={styles.myIconButton}>
+              <ListItemIcon className={styles.listIcon}>
                 <HomeRoundedIcon className={styles.homeIcon} />
               </ListItemIcon>
-              <ListItemText primary="home" />
+              <Typography className={styles.myIconButtonText}>home</Typography>
             </ListItemButton>
           </ListItem>
         </List>
         <nav>
           <List>
             {SidebarButtons?.map((buttons) => (
-              <ListItem>
+              <ListItem key={buttons.id} className={styles.listItem}>
                 <ListItemButton>
-                  <ListItemIcon>
+                  <ListItemIcon className={styles.listIcon}>
                     <buttons.buttonIcon />
                   </ListItemIcon>
-                  <ListItemText primary={buttons.buttonText} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -72,12 +76,11 @@ export const Sidebar = () => {
       </div>
 
       <List>
-        <ListItem>
+        <ListItem className={styles.listItem}>
           <ListItemButton>
-            <ListItemIcon>
+            <ListItemIcon className={styles.listIcon}>
               <LogoutRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="logout" />
           </ListItemButton>
         </ListItem>
       </List>

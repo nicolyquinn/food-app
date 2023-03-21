@@ -2,3 +2,12 @@ p {
   margin-block-start: 0em;
   margin-block-end: 0em;
 }
+
+* > h1,
+h2 {
+  color: #2a2b3c;
+}
+
+.css-106c1u2-MuiBadge-badge {
+  background-color: #fb9300;
+}
