@@ -160,7 +160,7 @@ export const TodayMenu = () => {
           target="_blank"
           href="https://dribbble.com/shots/15082603-Food-Delivery-Dashboard/attachments/6812686?mode=media"
         >
-          This project was inspired by this design from Dribbble
+          This project was inspired by this design from Dribbble!!!
         </a>
       </div>
     </div>
