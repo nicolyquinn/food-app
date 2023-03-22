@@ -1,4 +1,3 @@
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import {
@@ -9,6 +8,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Image from "next/image";
+import CategoryTabs from "./CategoryTabs";
 import styles from "./TodayMenu.module.scss";
 
 const category = [
@@ -108,52 +108,7 @@ export const TodayMenu = () => {
             <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
           </div>
         </div>
-        <div className={styles.categoryMap}>
-          {category?.map((item) => (
-            <div key={item.id} className={styles.categoryItem}>
-              <p className={styles.categoryIcon}>{item.icon}</p>
-              <p>{item.name}</p>
-              <ArrowForwardIosRoundedIcon className={styles.categoryArrow} />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles.pizzaWrapper}>
-        {pizzas?.map((pizza) => (
-          <div key={pizza.id} className={styles.pizzaItem}>
-            <Image
-              width={150}
-              height={150}
-              alt="pizza"
-              src={pizza.pizzaImage}
-              className={styles.pizzaImage}
-              priority
-            />
-            <p className={styles.pizzaName}>{pizza.pizzaName}</p>
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <p style={{ marginTop: "10px" }}>{pizza.rating}</p>
-                <div style={{ display: "flex", alignItems: "end" }}>
-                  <p className={styles.pizzaCurrency}>$ </p>
-                  <p className={styles.pizzaName}>{pizza.price}</p>
-                </div>
-              </div>
-              <AddRoundedIcon className={styles.plusIcon} />
-            </div>
-          </div>
-        ))}
+        <CategoryTabs />
       </div>
       <div className={styles.footer}>
         <a
