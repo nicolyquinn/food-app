@@ -52,11 +52,11 @@
   align-items: center;
   border-radius: 20px;
   height: 120px;
+  cursor: pointer;
 
   &:hover {
     background-color: #fb9300;
     color: white;
-    cursor: pointer;
     box-shadow: 2px 2px 5px #fb9300;
 
     .categoryIcon {

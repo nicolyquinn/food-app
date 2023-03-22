@@ -25,12 +25,12 @@ const category = [
   {
     id: 2,
     icon: "🍔",
-    name: "Burguer",
+    name: "Burger",
   },
   {
     id: 3,
     icon: "🌭",
-    name: "Hotdog",
+    name: "Subway",
   },
   {
     id: 4,
