@@ -1,13 +1,12 @@
 // Importe os tipos necessários do NextJS e do React
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "../TodayMenu.module.scss";
 
 // Defina o tipo de dados para o produto
-type Product = {
+export type Product = {
   id: number;
   name: string;
   category: string;
@@ -49,8 +48,12 @@ const category = [
   },
 ];
 
+interface CategoryTabsProps {
+  onAddToCart: (product: Product) => void;
+}
+
 // Defina a página com a função para exibir os produtos
-const CategoryTabs: NextPage = () => {
+const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
   // Defina um estado para a categoria selecionada
   const [selectedCategory, setSelectedCategory] = useState("Pizza");
 
@@ -127,7 +130,10 @@ const CategoryTabs: NextPage = () => {
                       <p className={styles.pizzaName}>{product.price}</p>
                     </div>
                   </div>
-                  <AddRoundedIcon className={styles.plusIcon} />
+                  <AddRoundedIcon
+                    className={styles.plusIcon}
+                    onClick={() => onAddToCart(product)}
+                  />
                 </div>
               </div>
             ))}

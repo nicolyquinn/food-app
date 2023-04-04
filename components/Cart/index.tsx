@@ -1,32 +1,12 @@
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Image from "next/image";
+import { Product } from "../TodayMenu/CategoryTabs";
 import styles from "./Cart.module.scss";
 
-const cartItems = [
-  {
-    id: 1,
-    itemImage: "/mushroom-pizza.png",
-    itemName: "Mushroom Pizza",
-    itemQuantity: "1",
-    itemPrice: "7.49",
-  },
-  {
-    id: 2,
-    itemImage: "/italian-pizza.webp",
-    itemName: "Italian Pizza",
-    itemQuantity: "2",
-    itemPrice: "13.18",
-  },
-  {
-    id: 3,
-    itemImage: "/sausage-pizza.png",
-    itemName: "Sausage Pizza",
-    itemQuantity: "1",
-    itemPrice: "5.49",
-  },
-];
-
-export const Cart = () => {
+interface CartProps {
+  cart: Product[];
+}
+export const Cart = ({ cart }: CartProps) => {
   return (
     <div className={styles.body}>
       <div className={styles.orderHeader}>
@@ -36,14 +16,14 @@ export const Cart = () => {
           <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
         </div>
       </div>
-      {cartItems?.map((item) => (
+      {cart?.map((item) => (
         <div key={item.id} className={styles.cartItemWrapper}>
           <Image
             width="50"
             height="50"
             alt="pizza"
-            src={item.itemImage}
-            className={styles.itemImage}
+            src={item.image}
+            className={styles.image}
             priority
           />
           <div
@@ -55,15 +35,15 @@ export const Cart = () => {
               marginLeft: "10px",
             }}
           >
-            <p className={styles.itemName}>{item.itemName}</p>
+            <p className={styles.itemName}>{item.name}</p>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className={styles.quantityWrapper}>
                 <p className={styles.quantity}>x</p>
-                <p className={styles.itemQuantity}>{item.itemQuantity}</p>
+                <p className={styles.itemQuantity}>2</p>
               </div>
               <div className={styles.priceWrapper}>
                 <p className={styles.currency}>$</p>
-                <p className={styles.itemPrice}>{item.itemPrice}</p>
+                <p className={styles.itemPrice}>{item.price}</p>
               </div>
             </div>
           </div>

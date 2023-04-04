@@ -8,7 +8,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Image from "next/image";
-import CategoryTabs from "./CategoryTabs";
+import CategoryTabs, { Product } from "./CategoryTabs";
 import styles from "./TodayMenu.module.scss";
 
 const category = [
@@ -68,7 +68,11 @@ const pizzas = [
   },
 ];
 
-export const TodayMenu = () => {
+export interface TodayMenuProps {
+  handleAddToCart: (product: Product) => void;
+}
+
+export const TodayMenu = ({ handleAddToCart }: TodayMenuProps) => {
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -108,7 +112,7 @@ export const TodayMenu = () => {
             <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
           </div>
         </div>
-        <CategoryTabs />
+        <CategoryTabs onAddToCart={handleAddToCart} />
       </div>
       <div className={styles.footer}>
         <a
