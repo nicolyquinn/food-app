@@ -1,20 +1,12 @@
 import { Cart } from "@/components/Cart";
 import { Sidebar } from "@/components/Sidebar";
 import { TodayMenu } from "@/components/TodayMenu";
-import { Product } from "@/components/TodayMenu/CategoryTabs";
 import { UserInfo } from "@/components/UserInfo";
 import styles from "@/styles/Home.module.scss";
 
 import Head from "next/head";
-import { useState } from "react";
 
 export default function Home() {
-  const [cart, setCart] = useState<Product[]>([]);
-
-  function handleAddToCart(product: Product) {
-    setCart([...cart, product]);
-  }
-
   return (
     <>
       <Head>
@@ -25,10 +17,10 @@ export default function Home() {
       <main>
         <div className={styles.mainBody}>
           <Sidebar />
-          <TodayMenu handleAddToCart={handleAddToCart} />
+          <TodayMenu />
           <div>
             <UserInfo />
-            <Cart cart={cart} />
+            <Cart />
           </div>
         </div>
       </main>

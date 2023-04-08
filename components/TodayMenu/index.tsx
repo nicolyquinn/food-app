@@ -1,3 +1,4 @@
+import { useCart } from "@/context/CartContext";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import {
@@ -8,7 +9,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Image from "next/image";
-import CategoryTabs, { Product } from "./CategoryTabs";
+import CategoryTabs from "./CategoryTabs";
 import styles from "./TodayMenu.module.scss";
 
 const category = [
@@ -68,11 +69,8 @@ const pizzas = [
   },
 ];
 
-export interface TodayMenuProps {
-  handleAddToCart: (product: Product) => void;
-}
-
-export const TodayMenu = ({ handleAddToCart }: TodayMenuProps) => {
+export const TodayMenu = () => {
+  const { cart, addToCart } = useCart();
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -112,7 +110,7 @@ export const TodayMenu = ({ handleAddToCart }: TodayMenuProps) => {
             <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
           </div>
         </div>
-        <CategoryTabs onAddToCart={handleAddToCart} />
+        <CategoryTabs onAddToCart={addToCart} />
       </div>
       <div className={styles.footer}>
         <a

@@ -1,12 +1,11 @@
+import { useCart } from "@/context/CartContext";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Image from "next/image";
-import { Product } from "../TodayMenu/CategoryTabs";
 import styles from "./Cart.module.scss";
 
-interface CartProps {
-  cart: Product[];
-}
-export const Cart = ({ cart }: CartProps) => {
+export const Cart = () => {
+  const { cart } = useCart();
+
   return (
     <div className={styles.body}>
       <div className={styles.orderHeader}>

@@ -1,11 +1,11 @@
 // Importe os tipos necessários do NextJS e do React
+import { useCart } from "@/context/CartContext";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "../TodayMenu.module.scss";
 
-// Defina o tipo de dados para o produto
 export type Product = {
   id: number;
   name: string;
@@ -52,15 +52,15 @@ interface CategoryTabsProps {
   onAddToCart: (product: Product) => void;
 }
 
-// Defina a página com a função para exibir os produtos
+// Define a página com a função para exibir os produtos
 const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
-  // Defina um estado para a categoria selecionada
+  // Define um estado para a categoria selecionada
   const [selectedCategory, setSelectedCategory] = useState("Pizza");
 
-  // Defina uma variável para armazenar os produtos filtrados
+  // Define uma variável para armazenar os produtos filtrados
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  // Defina uma função para filtrar os produtos pela categoria selecionada
+  // Define uma função para filtrar os produtos pela categoria selecionada
   const getProductsByCategory = async (
     category: string
   ): Promise<Product[]> => {
@@ -69,13 +69,15 @@ const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
     return products.filter((product: Product) => product.category === category);
   };
 
-  // Atualize a lista de produtos filtrados quando a categoria selecionada mudar
+  // Atualiza a lista de produtos filtrados quando a categoria selecionada mudar
   useEffect(() => {
     getProductsByCategory(selectedCategory).then((products) => {
       setFilteredProducts(products);
       debugger;
     });
   }, [selectedCategory]);
+
+  const { cart, addToCart } = useCart();
 
   return (
     <div>
@@ -132,7 +134,7 @@ const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
                   </div>
                   <AddRoundedIcon
                     className={styles.plusIcon}
-                    onClick={() => onAddToCart(product)}
+                    onClick={() => addToCart(product)}
                   />
                 </div>
               </div>
