@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "save": "npx tsc & next lint --fix & next build && git add ."
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",

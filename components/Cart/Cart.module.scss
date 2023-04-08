@@ -43,6 +43,8 @@
 
 .itemName {
   font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .quantityWrapper {
@@ -50,15 +52,21 @@
   align-items: center;
 }
 
-.quantity {
+.quantityIcon {
   color: #fb9300;
   font-weight: 600;
-  margin-right: 5px;
-  font-size: 14px;
+  margin: 0px 4px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .itemQuantity {
-  font-weight: 800;
+  font-weight: 600;
+  max-width: 30px;
+  border: none;
+  border-bottom: 1px solid #fb9300;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .priceWrapper {
@@ -93,5 +101,37 @@
     cursor: pointer;
     color: #fb9300;
     box-shadow: 2px 2px 5px #fb9300;
+  }
+}
+
+.cardWrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 500px;
+  padding-right: 10px;
+}
+
+.cardWrapper::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.cardWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+.cardWrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+.cardWrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.deleteButton {
+  font-size: 12px;
+  color: #fb9300;
+  cursor: pointer;
+
+  &:hover {
+    color: #fbbe69;
   }
 }

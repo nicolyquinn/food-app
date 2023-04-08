@@ -1,32 +1,17 @@
+import { Product, useCart } from "@/context/CartContext";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import Image from "next/image";
 import styles from "./Cart.module.scss";
 
-const cartItems = [
-  {
-    id: 1,
-    itemImage: "/mushroom-pizza.png",
-    itemName: "Mushroom Pizza",
-    itemQuantity: "1",
-    itemPrice: "7.49",
-  },
-  {
-    id: 2,
-    itemImage: "/italian-pizza.webp",
-    itemName: "Italian Pizza",
-    itemQuantity: "2",
-    itemPrice: "13.18",
-  },
-  {
-    id: 3,
-    itemImage: "/sausage-pizza.png",
-    itemName: "Sausage Pizza",
-    itemQuantity: "1",
-    itemPrice: "5.49",
-  },
-];
+interface CategoryTabsProps {
+  addMoreProduct: (product: Product) => void;
+}
 
 export const Cart = () => {
+  const { cart, addMoreProduct, removeProduct, deleteProduct } = useCart();
+
   return (
     <div className={styles.body}>
       <div className={styles.orderHeader}>
@@ -36,39 +21,74 @@ export const Cart = () => {
           <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
         </div>
       </div>
-      {cartItems?.map((item) => (
-        <div key={item.id} className={styles.cartItemWrapper}>
-          <Image
-            width="50"
-            height="50"
-            alt="pizza"
-            src={item.itemImage}
-            className={styles.itemImage}
-            priority
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              justifyContent: "center",
-              marginLeft: "10px",
-            }}
-          >
-            <p className={styles.itemName}>{item.itemName}</p>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div className={styles.quantityWrapper}>
-                <p className={styles.quantity}>x</p>
-                <p className={styles.itemQuantity}>{item.itemQuantity}</p>
+      <div className={styles.cardWrapper}>
+        {Object.keys(cart).length > 1 ? (
+          Object.keys(cart)?.map((productId) => {
+            const cartItem = cart[parseInt(productId)];
+            if (!cartItem) {
+              return null;
+            }
+            const product = cartItem?.product;
+            const quantity = cartItem?.quantity;
+            const productTotal = Number((product?.price * quantity).toFixed(2));
+
+            return (
+              <div key={productId} className={styles.cartItemWrapper}>
+                <Image
+                  width="50"
+                  height="50"
+                  alt="pizza"
+                  src={product?.image}
+                  className={styles.image}
+                  priority
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    justifyContent: "center",
+                    marginLeft: "10px",
+                  }}
+                >
+                  <p className={styles.itemName}>{product?.name}</p>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div className={styles.quantityWrapper}>
+                      <RemoveOutlinedIcon
+                        onClick={() => removeProduct(product)}
+                        className={styles.quantityIcon}
+                      />
+                      <input
+                        type="text"
+                        value={quantity}
+                        className={styles.itemQuantity}
+                      />
+                      <AddOutlinedIcon
+                        onClick={() => addMoreProduct(product)}
+                        className={styles.quantityIcon}
+                      />
+                    </div>
+                    <div className={styles.priceWrapper}>
+                      <p className={styles.currency}>$</p>
+                      <p className={styles.itemPrice}>{productTotal}</p>
+                    </div>
+                  </div>
+                  <p
+                    className={styles.deleteButton}
+                    onClick={() => deleteProduct(product)}
+                  >
+                    Remove
+                  </p>
+                </div>
               </div>
-              <div className={styles.priceWrapper}>
-                <p className={styles.currency}>$</p>
-                <p className={styles.itemPrice}>{item.itemPrice}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+            );
+          })
+        ) : (
+          <p>No product in cart</p>
+        )}
+      </div>
       <div>
         <button className={styles.checkoutButton}>Checkout</button>
       </div>

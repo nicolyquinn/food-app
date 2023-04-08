@@ -7,8 +7,8 @@ Open [https://food-app-black-eight.vercel.app/](https://food-app-black-eight.ver
 ## Project Status:
 
 ✅Desktop UI <br />
-🚧 Cart Functionality <br />
-🔜 Favorites Functionality <br />
+✅ Cart Functionality <br />
+🚧 Favorites Functionality <br />
 🔜 Search Bar Functionality <br />
 🔜 Mobile UI
 
