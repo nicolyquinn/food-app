@@ -10,6 +10,14 @@ Project Status:
 
 Open [https://food-app-black-eight.vercel.app/](https://food-app-black-eight.vercel.app/) with your browser to see the result.
 
+## Project Status:
+
+✅Desktop UI
+🚧 Cart Functionality
+🔜 Favorites Functionality
+🔜 Search Bar Functionality
+🔜 Mobile UI
+
 ## Technologies
 
 ✅ NextJS
