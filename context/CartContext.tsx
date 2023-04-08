@@ -76,12 +76,10 @@ export function CartProvider({ children }: Props) {
 
       const { product, quantity } = cart[productId];
       const productTotal = product?.price * quantity;
-      console.log("productTotal", productTotal);
       total += productTotal;
     }
 
     cart.total = typeof total === "number" ? Number(total.toFixed(2)) : 0;
-    console.log("cardTotal", cart.total);
     return cart.total;
   }
 

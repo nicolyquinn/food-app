@@ -1,4 +1,3 @@
-import { useCart } from "@/context/CartContext";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import {
@@ -70,7 +69,6 @@ const pizzas = [
 ];
 
 export const TodayMenu = () => {
-  const { cart, addToCart } = useCart();
   return (
     <div className={styles.body}>
       <div className={styles.header}>
@@ -110,7 +108,7 @@ export const TodayMenu = () => {
             <ArrowForwardIosRoundedIcon className={styles.viewAllArrow} />
           </div>
         </div>
-        <CategoryTabs onAddToCart={addToCart} />
+        <CategoryTabs />
       </div>
       <div className={styles.footer}>
         <a

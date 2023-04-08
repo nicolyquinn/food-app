@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 // styling
+import Link from "next/link";
 import styles from "./Sidebar.module.scss";
 
 const SidebarButtons = [
@@ -23,26 +24,31 @@ const SidebarButtons = [
     id: 1,
     buttonText: "chat",
     buttonIcon: ChatRoundedIcon,
+    link: "",
   },
   {
     id: 2,
     buttonText: "wallet",
     buttonIcon: AccountBalanceWalletRoundedIcon,
+    link: "",
   },
   {
     id: 3,
     buttonText: "favorites",
     buttonIcon: FavoriteRoundedIcon,
+    link: "/favorites",
   },
   {
     id: 4,
     buttonText: "list",
     buttonIcon: ArticleRoundedIcon,
+    link: "",
   },
   {
     id: 5,
     buttonText: "settings",
     buttonIcon: SettingsRoundedIcon,
+    link: "",
   },
 ];
 
@@ -51,25 +57,31 @@ export const Sidebar = () => {
     <Box className={styles.body}>
       <div>
         <List>
-          <ListItem className={styles.listItem}>
-            <ListItemButton className={styles.myIconButton}>
-              <ListItemIcon className={styles.listIcon}>
-                <HomeRoundedIcon className={styles.homeIcon} />
-              </ListItemIcon>
-              <Typography className={styles.myIconButtonText}>home</Typography>
-            </ListItemButton>
-          </ListItem>
+          <Link href="/">
+            <ListItem className={styles.listItem}>
+              <ListItemButton className={styles.myIconButton}>
+                <ListItemIcon className={styles.listIcon}>
+                  <HomeRoundedIcon className={styles.homeIcon} />
+                </ListItemIcon>
+                <Typography className={styles.myIconButtonText}>
+                  home
+                </Typography>
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
         <nav>
           <List>
             {SidebarButtons?.map((buttons) => (
-              <ListItem key={buttons.id} className={styles.listItem}>
-                <ListItemButton>
-                  <ListItemIcon className={styles.listIcon}>
-                    <buttons.buttonIcon />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
+              <Link href={buttons.link} key={buttons.id}>
+                <ListItem className={styles.listItem}>
+                  <ListItemButton>
+                    <ListItemIcon className={styles.listIcon}>
+                      <buttons.buttonIcon />
+                    </ListItemIcon>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
             ))}
           </List>
         </nav>

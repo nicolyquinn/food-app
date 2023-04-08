@@ -1,7 +1,9 @@
 // Importe os tipos necessários do NextJS e do React
 import { useCart } from "@/context/CartContext";
+import { useFavorites } from "@/context/FavoriteContext";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "../TodayMenu.module.scss";
@@ -48,12 +50,8 @@ const category = [
   },
 ];
 
-interface CategoryTabsProps {
-  onAddToCart: (product: Product) => void;
-}
-
 // Define a página com a função para exibir os produtos
-const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
+const CategoryTabs = (): JSX.Element => {
   // Define um estado para a categoria selecionada
   const [selectedCategory, setSelectedCategory] = useState("Pizza");
 
@@ -73,11 +71,12 @@ const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
   useEffect(() => {
     getProductsByCategory(selectedCategory).then((products) => {
       setFilteredProducts(products);
-      debugger;
     });
   }, [selectedCategory]);
 
-  const { cart, addToCart } = useCart();
+  const { addToCart } = useCart();
+
+  const { addToFavorites } = useFavorites();
 
   return (
     <div>
@@ -112,6 +111,7 @@ const CategoryTabs = ({ onAddToCart }: CategoryTabsProps): JSX.Element => {
                   priority
                 />
                 <p className={styles.pizzaName}>{product.name}</p>
+                <FavoriteIcon onClick={() => addToFavorites(product)} />
                 <div
                   style={{
                     display: "flex",
