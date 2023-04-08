@@ -30,6 +30,7 @@ export const Cart = () => {
             }
             const product = cartItem?.product;
             const quantity = cartItem?.quantity;
+            const productTotal = Number((product?.price * quantity).toFixed(2));
 
             return (
               <div key={productId} className={styles.cartItemWrapper}>
@@ -71,7 +72,7 @@ export const Cart = () => {
                     </div>
                     <div className={styles.priceWrapper}>
                       <p className={styles.currency}>$</p>
-                      <p className={styles.itemPrice}>{product?.price}</p>
+                      <p className={styles.itemPrice}>{productTotal}</p>
                     </div>
                   </div>
                   <p
