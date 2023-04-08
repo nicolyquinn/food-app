@@ -16,44 +16,54 @@ export const Cart = () => {
         </div>
       </div>
       <div className={styles.cardWrapper}>
-        {Object.keys(cart)?.map((productId) => {
-          const { product, quantity } = cart[parseInt(productId)];
-          return (
-            <div key={productId} className={styles.cartItemWrapper}>
-              <Image
-                width="50"
-                height="50"
-                alt="pizza"
-                src={product?.image}
-                className={styles.image}
-                priority
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                  justifyContent: "center",
-                  marginLeft: "10px",
-                }}
-              >
-                <p className={styles.itemName}>{product?.name}</p>
+        {Object.keys(cart).length > 1 ? (
+          Object.keys(cart)?.map((productId) => {
+            const cartItem = cart[parseInt(productId)];
+            if (!cartItem) {
+              return null;
+            }
+            const product = cartItem?.product;
+            const quantity = cartItem?.quantity;
+
+            return (
+              <div key={productId} className={styles.cartItemWrapper}>
+                <Image
+                  width="50"
+                  height="50"
+                  alt="pizza"
+                  src={product?.image}
+                  className={styles.image}
+                  priority
+                />
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    justifyContent: "center",
+                    marginLeft: "10px",
+                  }}
                 >
-                  <div className={styles.quantityWrapper}>
-                    <p className={styles.quantity}>x</p>
-                    <p className={styles.itemQuantity}>{quantity}</p>
-                  </div>
-                  <div className={styles.priceWrapper}>
-                    <p className={styles.currency}>$</p>
-                    <p className={styles.itemPrice}>{product?.price}</p>
+                  <p className={styles.itemName}>{product?.name}</p>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div className={styles.quantityWrapper}>
+                      <p className={styles.quantity}>x</p>
+                      <p className={styles.itemQuantity}>{quantity}</p>
+                    </div>
+                    <div className={styles.priceWrapper}>
+                      <p className={styles.currency}>$</p>
+                      <p className={styles.itemPrice}>{product?.price}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <p>Nenhum produto no carrinho</p>
+        )}
       </div>
       <div>
         <button className={styles.checkoutButton}>Checkout</button>

@@ -1,3 +1,4 @@
+import { useCart } from "@/context/CartContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import Avatar from "@mui/material/Avatar";
@@ -6,6 +7,10 @@ import Image from "next/image";
 import styles from "./UserInfo.module.scss";
 
 export const UserInfo = () => {
+  const { cart } = useCart();
+
+  const total = cart.total;
+
   return (
     <div className={styles.body}>
       <div className={styles.userHeader}>
@@ -33,7 +38,7 @@ export const UserInfo = () => {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
-            <p className={styles.orderTotal}>$ 1560.00</p>
+            <p className={styles.orderTotal}>$ {total}</p>
             <p className={styles.cardName}>Pandinha</p>
           </div>
           <div className={styles.cardInfo}>

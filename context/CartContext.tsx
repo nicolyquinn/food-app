@@ -6,7 +6,7 @@ export type Product = {
   category: string;
   image: string;
   rating: string;
-  price: string;
+  price: number;
 };
 
 type CartMap = {
@@ -15,13 +15,18 @@ type CartMap = {
     quantity: number;
   };
 };
+
+interface ExtendedCartMap extends CartMap {
+  total: number;
+}
+
 type cartContextType = {
-  cart: CartMap;
+  cart: ExtendedCartMap;
   addToCart: (product: Product) => void;
 };
 
 const cartContextDefaultValues: cartContextType = {
-  cart: [],
+  cart: { total: 0 },
   addToCart: () => {},
 };
 
@@ -36,18 +41,41 @@ type Props = {
 };
 
 export function CartProvider({ children }: Props) {
-  const [cart, setCart] = useState<CartMap>([]);
+  const [cart, setCart] = useState<ExtendedCartMap>({
+    total: 0,
+  });
 
   function addToCart(product: Product) {
     const productId = product.id;
-    const updateCart = { ...cart };
-    if (productId in updateCart) {
-      updateCart[productId].quantity++;
+    const productToUpdate = cart[productId];
+
+    if (productToUpdate) {
+      productToUpdate.quantity++;
     } else {
-      updateCart[productId] = { product, quantity: 1 };
+      cart[productId] = { product, quantity: 1 };
     }
 
-    setCart(updateCart);
+    const updatedCart = { ...cart };
+    updatedCart.total = calculateCartTotal(updatedCart);
+    setCart(updatedCart);
+  }
+
+  function calculateCartTotal(cart: ExtendedCartMap): number {
+    let total = 0;
+
+    for (const productId in cart) {
+      if (productId === "total") {
+        continue;
+      }
+
+      const { product, quantity } = cart[productId];
+      const productTotal = product?.price * quantity;
+      total += productTotal;
+    }
+
+    cart.total = typeof total === "number" ? Number(total.toFixed(2)) : 0;
+
+    return cart.total;
   }
 
   const value = {

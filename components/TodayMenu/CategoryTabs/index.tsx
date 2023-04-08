@@ -12,7 +12,7 @@ export type Product = {
   category: string;
   image: string;
   rating: string;
-  price: string;
+  price: number;
 };
 
 const category = [
