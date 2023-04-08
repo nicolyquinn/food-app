@@ -1,10 +1,16 @@
-import { useCart } from "@/context/CartContext";
+import { Product, useCart } from "@/context/CartContext";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import Image from "next/image";
 import styles from "./Cart.module.scss";
 
+interface CategoryTabsProps {
+  addMoreProduct: (product: Product) => void;
+}
+
 export const Cart = () => {
-  const { cart } = useCart();
+  const { cart, addMoreProduct, removeProduct, deleteProduct } = useCart();
 
   return (
     <div className={styles.body}>
@@ -49,20 +55,37 @@ export const Cart = () => {
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <div className={styles.quantityWrapper}>
-                      <p className={styles.quantity}>x</p>
-                      <p className={styles.itemQuantity}>{quantity}</p>
+                      <RemoveOutlinedIcon
+                        onClick={() => removeProduct(product)}
+                        className={styles.quantityIcon}
+                      />
+                      <input
+                        type="text"
+                        value={quantity}
+                        className={styles.itemQuantity}
+                      />
+                      <AddOutlinedIcon
+                        onClick={() => addMoreProduct(product)}
+                        className={styles.quantityIcon}
+                      />
                     </div>
                     <div className={styles.priceWrapper}>
                       <p className={styles.currency}>$</p>
                       <p className={styles.itemPrice}>{product?.price}</p>
                     </div>
                   </div>
+                  <p
+                    className={styles.deleteButton}
+                    onClick={() => deleteProduct(product)}
+                  >
+                    Remove
+                  </p>
                 </div>
               </div>
             );
           })
         ) : (
-          <p>Nenhum produto no carrinho</p>
+          <p>No product in cart</p>
         )}
       </div>
       <div>

@@ -23,11 +23,17 @@ interface ExtendedCartMap extends CartMap {
 type cartContextType = {
   cart: ExtendedCartMap;
   addToCart: (product: Product) => void;
+  addMoreProduct: (product: Product) => void;
+  removeProduct: (product: Product) => void;
+  deleteProduct: (product: Product) => void;
 };
 
 const cartContextDefaultValues: cartContextType = {
   cart: { total: 0 },
   addToCart: () => {},
+  addMoreProduct: () => {},
+  removeProduct: () => {},
+  deleteProduct: () => {},
 };
 
 const CartContext = createContext<cartContextType>(cartContextDefaultValues);
@@ -78,9 +84,55 @@ export function CartProvider({ children }: Props) {
     return cart.total;
   }
 
+  function addMoreProduct(product: Product) {
+    const productId = product.id;
+    const productToUpdate = cart[productId];
+
+    if (productToUpdate) {
+      productToUpdate.quantity++;
+    }
+
+    const updatedCart = { ...cart };
+    updatedCart.total = calculateCartTotal(updatedCart);
+    setCart(updatedCart);
+  }
+
+  function removeProduct(product: Product) {
+    const productId = product.id;
+    const productToUpdate = cart[productId];
+    const updatedCart = { ...cart };
+
+    if (productToUpdate) {
+      productToUpdate.quantity--;
+
+      if (productToUpdate.quantity === 0) {
+        delete updatedCart[productId];
+      }
+    }
+
+    updatedCart.total = calculateCartTotal(updatedCart);
+    setCart(updatedCart);
+  }
+
+  function deleteProduct(product: Product) {
+    const productId = product.id;
+    const productToUpdate = cart[productId];
+    const updatedCart = { ...cart };
+
+    if (productToUpdate) {
+      delete updatedCart[productId];
+    }
+
+    updatedCart.total = calculateCartTotal(updatedCart);
+    setCart(updatedCart);
+  }
+
   const value = {
     cart,
     addToCart,
+    addMoreProduct,
+    removeProduct,
+    deleteProduct,
   };
 
   return (
