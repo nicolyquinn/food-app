@@ -95,3 +95,25 @@
     box-shadow: 2px 2px 5px #fb9300;
   }
 }
+
+.cardWrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+  padding-right: 10px;
+}
+
+.cardWrapper::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.cardWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+.cardWrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+.cardWrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

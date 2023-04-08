@@ -9,8 +9,14 @@ export type Product = {
   price: string;
 };
 
+type CartMap = {
+  [productId: number]: {
+    product: Product;
+    quantity: number;
+  };
+};
 type cartContextType = {
-  cart: Product[];
+  cart: CartMap;
   addToCart: (product: Product) => void;
 };
 
@@ -30,10 +36,18 @@ type Props = {
 };
 
 export function CartProvider({ children }: Props) {
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartMap>([]);
 
   function addToCart(product: Product) {
-    setCart([...cart, product]);
+    const productId = product.id;
+    const updateCart = { ...cart };
+    if (productId in updateCart) {
+      updateCart[productId].quantity++;
+    } else {
+      updateCart[productId] = { product, quantity: 1 };
+    }
+
+    setCart(updateCart);
   }
 
   const value = {
